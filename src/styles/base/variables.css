@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Colors - Luxury "Quiet Luxury" Theme */
+  --color-bg: #fbfbfc;           /* Clean crisp luxury off-white */
+  --color-brand-blue: #0c3c9c;   /* Architectural Brand Blue */
+  --color-text-primary: #121212; /* Deep dark charcoal */
+  --color-text-muted: #888888;   /* Soft gray */
+  --color-border: #e0dcd5;       /* Subtle border */
+  --color-accent: #c4b5a4;       /* Sand / beige accent */
+  
+  /* Semantic aliases */
+  --bg-surface: var(--color-bg);
+  --bg-elevated: #ffffff;
+  --text-primary: var(--color-text-primary);
+  --text-muted: var(--color-text-muted);
+  --border-subtle: var(--color-border);
+  --accent: var(--color-brand-blue); /* Accent is now the Brand Blue */
+
+  /* Typography Fonts */
+  --font-display: 'Cormorant Garamond', serif; /* Serif elegant untuk heading */
+  --font-sans: 'Inter', sans-serif;            /* Sans-serif modern & clean untuk UI/body */
+
+  /* Type Scale - fluid with clamp() */
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+  --text-base: clamp(1rem,     0.9rem  + 0.5vw,  1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.6vw,  1.25rem);
+  --text-xl:   clamp(1.25rem,  1.1rem  + 0.75vw, 1.5rem);
+  --text-2xl:  clamp(1.5rem,   1.2rem  + 1.5vw,  2rem);
+  --text-3xl:  clamp(1.875rem, 1.4rem  + 2.5vw,  3rem);
+  --text-4xl:  clamp(2.25rem,  1.6rem  + 3.5vw,  4rem);
+
+  /* Spacing - 4pt grid. Every value is a multiple of 4 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --spacing-section: 12rem;      /* Large luxurious negative space */
+
+  /* Shadows - 4 levels max */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.03);
+  --shadow-lg:  0 12px 32px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.03);
+  --shadow-xl:  0 24px 64px rgba(0,0,0,0.10), 0 8px 16px rgba(0,0,0,0.03);
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Motion */
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-expo:   cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast:  150ms;
+  --duration-base:  250ms;
+  --duration-slow:  400ms;
+  --duration-enter: 500ms;
+}

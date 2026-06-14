@@ -1,0 +1,297 @@
+.heroSection {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  background-color: var(--bg-surface);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-8) var(--space-12);
+  z-index: 10;
+  background: transparent;
+}
+
+.logoContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.logo {
+  height: 36px;
+  width: 36px;
+  display: block;
+  color: var(--color-brand-blue);
+}
+
+.menuContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.menuBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 420px;
+  max-width: 100%;
+  height: 64px;
+  padding: 0 30px;
+  background-color: #f6f6f6;
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out-expo);
+}
+
+.menuBtn:hover {
+  background-color: #ededed;
+}
+
+.menuText {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  width: 60px;
+  height: 9px;
+}
+
+.hamburgerLine {
+  width: 100%;
+  height: 1px;
+  background-color: var(--text-primary);
+}
+
+.ctaContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ctaBtn {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: opacity var(--duration-fast) var(--ease-out-expo);
+}
+
+.ctaBtn:hover {
+  opacity: 0.7;
+}
+
+/* Main Content Area */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--space-12) 0 var(--space-12);
+  padding-bottom : var(--space-1);
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+}
+
+.brandContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Description Block above brand name */
+.descriptionBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  align-self: flex-end;
+  max-width: 540px;
+  margin-bottom: var(--space-4);
+  margin-right: var(--space-8);
+  opacity: 0;
+}
+
+.blueSquare {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-brand-blue);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.descText {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.brandTitle {
+  font-family: var(--font-sans);
+  /* Fluid font sizing: calibrated to span exactly to the container boundaries, matching the image width below */
+  font-size: clamp(10rem, -2rem + 33.5vw, 130rem);
+  line-height: 1;
+  font-weight: 700;
+  color: var(--color-brand-blue); 
+  text-transform: none;
+  width: 100%;
+  overflow: hidden;
+  margin-left: 0;
+  white-space: nowrap;
+  position: relative;
+  top: 0.05em;
+}
+
+.charMask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  margin-bottom: -0.05em;
+  padding: 0 0.15em; /* Gutters to prevent clipping of slanted glyph corners like 'v' and 'y' */
+  margin-right: -0.34em; /* Cancels out the 0.3em gutters and applies a tight letter-spacing */
+}
+
+.charMask:first-child {
+  margin-left: -0.15em; /* Cancel out the left safety gutter for perfect left alignment */
+}
+
+.charMask:last-child {
+  margin-right: -0.15em; /* Cancel out the right safety gutter for perfect right alignment */
+}
+
+.char {
+  display: inline-block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+/* Bottom Metadata Row */
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: var(--space-6);
+  padding-bottom: var(--space-3);
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+.metaLeft, .metaRight {
+  opacity: 0.95;
+}
+
+/* Peaking Image Section at Bottom */
+.imageSection {
+  width: 100%;
+  padding: 0 var(--space-12);
+  z-index: 1;
+}
+
+.imageWrapper {
+  width: 100%;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+  aspect-ratio: 21 / 8;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.04);
+  opacity: 0; /* Animated via GSAP */
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  transition: transform 3s var(--ease-out-expo);
+}
+
+.imageWrapper:hover .heroImg {
+  transform: scale(1.02);
+}
+
+/* Responsive Rules */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: var(--space-6) var(--space-6);
+  }
+  .mainContent {
+    padding: 0 var(--space-6) 0 var(--space-6);
+  }
+  .imageSection {
+    padding: 0 var(--space-6);
+  }
+  .descriptionBlock {
+    margin-right: 0;
+    max-width: 280px;
+  }
+  .brandTitle {
+    font-size: clamp(4.5rem, -1rem + 33.5vw, 25rem);
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: var(--space-4) var(--space-4);
+  }
+  .mainContent {
+    padding: 0 var(--space-4) 0 var(--space-4);
+  }
+  .imageSection {
+    padding: 0 var(--space-4);
+  }
+  .menuBtn {
+    width: 100%;
+    max-width: 280px;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 0;
+  }
+  .hamburger {
+    width: 36px;
+    gap: 4px;
+  }
+  .brandTitle {
+    font-size: clamp(3.5rem, -0.67rem + 33.5vw, 15rem);
+    margin-left: 0;
+  }
+  .descriptionBlock {
+    max-width: 100%;
+    align-self: flex-start;
+    margin-bottom: var(--space-6);
+  }
+  .metaRow {
+    font-size: 9px;
+  }
+  .imageWrapper {
+    aspect-ratio: 16 / 9;
+  }
+}
