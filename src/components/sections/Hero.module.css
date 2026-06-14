@@ -110,7 +110,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 0 var(--space-12) 0 var(--space-12);
-  padding-bottom : var(--space-1);
+  padding-bottom: var(--space-1);
   position: relative;
   z-index: 2;
   margin-top: auto;
@@ -158,7 +158,7 @@
   font-size: clamp(10rem, -2rem + 33.5vw, 130rem);
   line-height: 1;
   font-weight: 700;
-  color: var(--color-brand-blue); 
+  color: var(--color-brand-blue);
   text-transform: none;
   width: 100%;
   overflow: hidden;
@@ -173,16 +173,20 @@
   overflow: hidden;
   vertical-align: bottom;
   margin-bottom: -0.05em;
-  padding: 0 0.15em; /* Gutters to prevent clipping of slanted glyph corners like 'v' and 'y' */
-  margin-right: -0.34em; /* Cancels out the 0.3em gutters and applies a tight letter-spacing */
+  padding: 0 0.15em;
+  /* Gutters to prevent clipping of slanted glyph corners like 'v' and 'y' */
+  margin-right: -0.34em;
+  /* Cancels out the 0.3em gutters and applies a tight letter-spacing */
 }
 
 .charMask:first-child {
-  margin-left: -0.15em; /* Cancel out the left safety gutter for perfect left alignment */
+  margin-left: -0.15em;
+  /* Cancel out the left safety gutter for perfect left alignment */
 }
 
 .charMask:last-child {
-  margin-right: -0.15em; /* Cancel out the right safety gutter for perfect right alignment */
+  margin-right: -0.15em;
+  /* Cancel out the right safety gutter for perfect right alignment */
 }
 
 .char {
@@ -205,32 +209,60 @@
   font-weight: 400;
 }
 
-.metaLeft, .metaRight {
+.metaLeft,
+.metaRight {
   opacity: 0.95;
 }
 
-/* Peaking Image Section at Bottom */
+/* Scroll-pinned Video Section at Bottom */
+.videoScrollContainer {
+  position: relative;
+  width: 100%;
+  height: 200vh;
+  /* Scroll range */
+  margin-top: -8vh;
+  z-index: 5;
+}
+
+.stickyWrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
 .imageSection {
   width: 100%;
+  height: 100vh;
   padding: 0 var(--space-12);
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  will-change: padding;
 }
 
 .imageWrapper {
   width: 100%;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  overflow: hidden;
   aspect-ratio: 21 / 8;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.04);
-  opacity: 0; /* Animated via GSAP */
+  opacity: 0;
+  /* Animated via GSAP */
+  will-change: width, height, aspect-ratio;
 }
 
 .heroImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;
-  transition: transform 3s var(--ease-out-expo);
+  object-position: center center;
 }
 
 .imageWrapper:hover .heroImg {
@@ -242,16 +274,20 @@
   .navbar {
     padding: var(--space-6) var(--space-6);
   }
+
   .mainContent {
     padding: 0 var(--space-6) 0 var(--space-6);
   }
+
   .imageSection {
     padding: 0 var(--space-6);
   }
+
   .descriptionBlock {
     margin-right: 0;
     max-width: 280px;
   }
+
   .brandTitle {
     font-size: clamp(4.5rem, -1rem + 33.5vw, 25rem);
     margin-left: 0;
@@ -262,12 +298,15 @@
   .navbar {
     padding: var(--space-4) var(--space-4);
   }
+
   .mainContent {
     padding: 0 var(--space-4) 0 var(--space-4);
   }
+
   .imageSection {
     padding: 0 var(--space-4);
   }
+
   .menuBtn {
     width: 100%;
     max-width: 280px;
@@ -275,22 +314,27 @@
     padding: 0 16px;
     border-radius: 0;
   }
+
   .hamburger {
     width: 36px;
     gap: 4px;
   }
+
   .brandTitle {
     font-size: clamp(3.5rem, -0.67rem + 33.5vw, 15rem);
     margin-left: 0;
   }
+
   .descriptionBlock {
     max-width: 100%;
     align-self: flex-start;
     margin-bottom: var(--space-6);
   }
+
   .metaRow {
     font-size: 9px;
   }
+
   .imageWrapper {
     aspect-ratio: 16 / 9;
   }
