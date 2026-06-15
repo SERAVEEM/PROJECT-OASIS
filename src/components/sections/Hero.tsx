@@ -5,13 +5,10 @@ import { useGSAP } from '@gsap/react';
 import styles from './Hero.module.css';
 import { ASSETS } from '../../utils/asset';
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 export const Hero: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoContainerRef = useRef<HTMLDivElement>(null);
-  const videoSectionRef = useRef<HTMLDivElement>(null);
   const videoWrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const brandWord = "Haven";
@@ -20,14 +17,13 @@ export const Hero: FC = () => {
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-    // Navbar animation
+    // 1. Entrance Animations on Load
     tl.fromTo(
       `.${styles.navbar}`,
       { opacity: 0, y: -25 },
       { opacity: 1, y: 0, duration: 1.2, delay: 0.1 }
     );
 
-    // Side description reveal
     tl.fromTo(
       `.${styles.descriptionBlock}`,
       { opacity: 0, y: 15 },
@@ -35,7 +31,6 @@ export const Hero: FC = () => {
       '-=0.8'
     );
 
-    // Oasis letters reveal
     tl.fromTo(
       `.js-reveal-char`,
       { y: '110%' },
@@ -43,7 +38,6 @@ export const Hero: FC = () => {
       '-=1.0'
     );
 
-    // Bottom metadata labels
     tl.fromTo(
       `.${styles.metaLeft}, .${styles.metaRight}`,
       { opacity: 0, y: 15 },
@@ -51,42 +45,63 @@ export const Hero: FC = () => {
       '-=0.8'
     );
 
-    // Image/Video reveal animation on load
+    // Initial load animation of the video card resting at the bottom
     tl.fromTo(
       videoWrapperRef.current,
-      { opacity: 0, y: 40 },
+      { opacity: 0, y: 60 },
       { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' },
       '-=1.1'
     );
 
-    // Scroll-triggered Video scaling and pinning
-    gsap.timeline({
+    // 2. Scroll-pinned Video Expansion ("Eating" the page)
+    const scrollTl = gsap.timeline({
       scrollTrigger: {
-        trigger: videoContainerRef.current,
+        trigger: containerRef.current,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 1, // Smooth scrub delay
+        scrub: 1, 
         invalidateOnRefresh: true,
       }
-    })
-      .to(videoSectionRef.current, {
-        paddingLeft: 0,
-        paddingRight: 0,
-        ease: 'none',
-      }, 0)
-      .to(videoWrapperRef.current, {
-        width: '100vw',
-        height: '100vh',
-        borderRadius: '0px',
-        aspectRatio: 'auto',
-        ease: 'none',
-      }, 0);
+    });
+
+    // Video expands from the bottom bar to fill the entire viewport
+    scrollTl.to(videoWrapperRef.current, {
+      width: '100vw',
+      maxWidth: '100vw',
+      height: '100vh',
+      ease: 'none',
+    }, 0);
+
+    // Push the entire text content UP and out of the viewport
+    scrollTl.to(`.${styles.mainContent}`, {
+      yPercent: -100,
+      ease: 'none',
+    }, 0);
+
+    // Fade out description and metadata early in the scroll
+    scrollTl.to(`.${styles.descriptionBlock}`, {
+      opacity: 0,
+      ease: 'none',
+    }, 0);
+
+    scrollTl.to(`.${styles.metaRow}`, {
+      opacity: 0,
+      ease: 'none',
+    }, 0);
+
+    // Spread the letters horizontally as the text scrolls up
+    scrollTl.to('.js-char-mask-0', { xPercent: -150, ease: 'none' }, 0);
+    scrollTl.to('.js-char-mask-1', { xPercent: -75, ease: 'none' }, 0);
+    scrollTl.to('.js-char-mask-3', { xPercent: 75, ease: 'none' }, 0);
+    scrollTl.to('.js-char-mask-4', { xPercent: 150, ease: 'none' }, 0);
 
   }, { scope: containerRef });
 
   return (
-    <>
-      <section ref={containerRef} className={styles.heroSection}>
+    <div ref={containerRef} className={styles.scrollContainer}>
+      <div className={styles.stickyWrapper}>
+        
+        {/* Navigation Bar */}
         <header className={styles.navbar}>
           <div className={styles.logoContainer}>
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" className={styles.logo}>
@@ -113,8 +128,8 @@ export const Hero: FC = () => {
           </div>
         </header>
 
+        {/* Text Content (Layered underneath the expanding video) */}
         <div className={styles.mainContent}>
-          {/* Brand Container with side description + giant brand name */}
           <div className={styles.brandContainer}>
             <div className={styles.descriptionBlock}>
               <span className={styles.blueSquare}></span>
@@ -126,7 +141,7 @@ export const Hero: FC = () => {
 
             <h1 className={styles.brandTitle} aria-label={brandWord}>
               {letters.map((char, idx) => (
-                <span key={idx} className={styles.charMask}>
+                <span key={idx} className={`${styles.charMask} js-char-mask-${idx}`}>
                   <span className={`${styles.char} js-reveal-char`}>
                     {char}
                   </span>
@@ -135,36 +150,30 @@ export const Hero: FC = () => {
             </h1>
           </div>
 
-          {/* Bottom Metadata row */}
           <div className={styles.metaRow}>
             <div className={styles.metaLeft}>EST. 1990</div>
             <div className={styles.metaRight}>MELBOURNE</div>
           </div>
         </div>
-      </section>
 
-      {/* Scroll-pinned video expansion section */}
-      <div ref={videoContainerRef} className={styles.videoScrollContainer}>
-        <div className={styles.stickyWrapper}>
-          <div ref={videoSectionRef} className={styles.imageSection}>
-            <div ref={videoWrapperRef} className={styles.imageWrapper}>
-              <video
-                src={ASSETS.heroVideo}
-                ref={videoRef}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                className={styles.heroImg}
-                width="1440"
-                height="800"
-              />
-            </div>
-          </div>
+        {/* The Video Card Layer (Sits on top, centralized at the bottom) */}
+        <div ref={videoWrapperRef} className={styles.videoWrapper}>
+          <video
+            src={ASSETS.heroVideo}
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className={styles.heroImg}
+            width="1440"
+            height="800"
+          />
         </div>
+
       </div>
-    </>
+    </div>
   );
 };
 

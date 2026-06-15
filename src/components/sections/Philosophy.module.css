@@ -7,7 +7,7 @@
   align-items: center;
   min-height: 100vh;
   position: relative;
-  z-index: 5; /* Sit above the hero's sticky container */
+  z-index: 5; 
   box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.02);
 }
 

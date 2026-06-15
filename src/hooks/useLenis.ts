@@ -3,10 +3,7 @@ import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-/**
- * Custom hook to initialize Lenis smooth scrolling and synchronize it with
- * GSAP ScrollTrigger. Automatically cleans up on unmount.
- */
+
 export const useLenis = () => {
   useEffect(() => {
     // Register ScrollTrigger plugin
